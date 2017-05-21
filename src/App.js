@@ -8,6 +8,8 @@ class Puzzle extends Component {
     super(props)
     this.state = {
       grid: new Array(props.rows.length).fill(0).map(_ => new Array(props.cols.length).fill(0)),
+      rowMarks: new Set(),
+      colMarks: new Set(),
     }
   }
 
@@ -51,26 +53,37 @@ class Puzzle extends Component {
           borderBottom: thickBorder,
         }}>
           <div style={{display: 'inline-block', width: width - cols.length * cellSize}}/>
-          {cols.map((col, idx) => (
+          {cols.map((col, colIdx) => (
             <div
-              key={idx}
+              key={colIdx}
               style={{
                 width: cellSize,
                 height: '100%',
-                borderLeft: idx && thinBorder,
+                borderLeft: colIdx && thinBorder,
                 display: 'inline-flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-end',
                 verticalAlign: 'top',
               }}
             >
-              {col.map((n, idx) => (
+              {col.map((n, nIdx) => (
                 <div
-                  key={idx}
+                  key={nIdx}
                   style={{
                     width: cellSize,
                     height: cellSize,
                     fontWeight: 'bold',
+                    color: this.state.colMarks.has(`${colIdx}-${nIdx}`) ? 'red' : 'black',
+                  }}
+                  onClick={_ => {
+                    const key = `${colIdx}-${nIdx}`
+                    let newMarks = new Set(this.state.colMarks)
+                    if (newMarks.has(key)) {
+                      newMarks.delete(key)
+                    } else {
+                      newMarks.add(key)
+                    }
+                    this.setState({colMarks: newMarks})
                   }}
                 >
                   {n}
@@ -90,24 +103,36 @@ class Puzzle extends Component {
           borderRight: thickBorder,
         }}>
           <div style={{height: height - rows.length * cellSize}}/>
-          {rows.map((row, idx) => (
+          {rows.map((row, rowIdx) => (
             <div
-              key={idx}
+              key={rowIdx}
               style={{
                 width: '100%',
                 height: cellSize,
-                borderTop: idx && thinBorder,
+                borderTop: rowIdx && thinBorder,
                 display: 'inline-flex',
                 justifyContent: 'flex-end',
               }}
             >
-              {row.map((n, idx) => (
+              {row.map((n, nIdx) => (
                 <div
-                  key={idx}
+                  key={nIdx}
                   style={{
                     width: cellSize,
                     height: cellSize,
                     fontWeight: 'bold',
+                    color: this.state.rowMarks.has(`${rowIdx}-${nIdx}`) ? 'red' : 'black',
+                    cursor: 'default',
+                  }}
+                  onClick={_ => {
+                    const key = `${rowIdx}-${nIdx}`
+                    let newMarks = new Set(this.state.rowMarks)
+                    if (newMarks.has(key)) {
+                      newMarks.delete(key)
+                    } else {
+                      newMarks.add(key)
+                    }
+                    this.setState({rowMarks: newMarks})
                   }}
                 >
                   {n}
