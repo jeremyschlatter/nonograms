@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import update from 'immutability-helper'
 
@@ -84,6 +83,7 @@ class Puzzle extends Component {
           border: thickBorder,
           marginLeft: 'auto',
           marginRight: 'auto',
+          textAlign: 'center',
         }}>
 
           { /* column headers */ }
@@ -262,38 +262,29 @@ class Puzzle extends Component {
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Puzzle
-          solution={[
-            [0, 0, 0, 1, 1],
-            [0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 0],
-            [1, 1, 0, 0, 0],
-            [1, 1, 0, 1, 1],
-          ]}
-          rows={[
-            [2],
-            [1],
-            [4],
-            [2],
-            [2, 2],
-          ]}
-          cols={[
-            [3],
-            [3],
-            [1],
-            [1, 1, 1],
-            [2, 1],
-          ]}
-        />
-      </div>
+      <Puzzle
+        solution={[
+          [0, 0, 0, 1, 1],
+          [0, 0, 0, 0, 1],
+          [1, 1, 1, 1, 0],
+          [1, 1, 0, 0, 0],
+          [1, 1, 0, 1, 1],
+        ]}
+        rows={[
+          [2],
+          [1],
+          [4],
+          [2],
+          [2, 2],
+        ]}
+        cols={[
+          [3],
+          [3],
+          [1],
+          [1, 1, 1],
+          [2, 1],
+        ]}
+      />
     )
   }
 }
