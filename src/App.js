@@ -74,6 +74,7 @@ class Puzzle extends Component {
                     height: cellSize,
                     fontWeight: 'bold',
                     color: this.state.colMarks.has(`${colIdx}-${nIdx}`) ? 'red' : 'black',
+                    cursor: 'default',
                   }}
                   onClick={_ => {
                     const key = `${colIdx}-${nIdx}`
